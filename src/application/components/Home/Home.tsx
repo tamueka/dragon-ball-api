@@ -48,7 +48,18 @@ export const Home: React.FC = () => {
       ) : (
         <ul className="character-list">
           {data.slice(0, 4).map((character, index) => (
-            <li key={index}>{character.name}</li>
+            <li key={index}>
+              <div className="card">
+                <img src={character.image} alt="Avatar" />
+                <div className="container">
+                  <h4>
+                    <b>{character.name}</b>
+                  </h4>
+                  <p>{character.race}</p>
+                  <p>{character.affiliation}</p>
+                </div>
+              </div>
+            </li>
           ))}
         </ul>
       )}
