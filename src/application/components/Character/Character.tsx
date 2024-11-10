@@ -11,7 +11,7 @@ const Character: React.FC<CharacterProps> = ({
   onAddToFavorites,
 }) => {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems : "center"}}>
       <h3>{character.name}</h3>
       <img
         src={character.image}

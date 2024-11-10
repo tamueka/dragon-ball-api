@@ -1,6 +1,7 @@
 import React from "react";
 import Character from "../Character/Character";
 import { useDragonBallContext } from "../../context/DragonBallProvider";
+import { Link } from "react-router-dom";
 
 const CharacterList: React.FC = () => {
   const { characters, addToFavorites, searchTerm } = useDragonBallContext();
@@ -12,11 +13,13 @@ const CharacterList: React.FC = () => {
   return (
     <div>
       {filteredCharacters.slice(0, 4).map((character) => (
-        <Character
-          key={character.id}
-          character={character}
-          onAddToFavorites={addToFavorites}
-        />
+        <Link to={`/character/${character.id}`} key={character.id}>
+          <Character
+            key={character.id}
+            character={character}
+            onAddToFavorites={addToFavorites}
+          />
+        </Link>
       ))}
     </div>
   );
