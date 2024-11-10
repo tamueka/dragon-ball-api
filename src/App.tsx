@@ -4,6 +4,7 @@ import CharacterList from "./application/components/CharacterList/Characterlist"
 import { Footer } from "./application/components/Footer/Footer";
 import { Header } from "./application/components/Header/Header";
 import { DragonBallProvider } from "./application/context/DragonBallProvider";
+import CharacterDetail from "./application/components/CharacterDetail/CharacterDetail";
 
 export const App: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ export const App: React.FC = () => {
             {/* Ruta principal para la lista de personajes */}
             <Route path="/" element={<CharacterList />} />
             {/* Ruta dinámica para los detalles de un personaje específico */}
-            {/*  <Route path="/character/:id" element={<CharacterDetail />} /> */}
+            <Route path="/character/:id" element={<CharacterDetail />} /> 
           </Routes>
         </div>
         <Footer />
