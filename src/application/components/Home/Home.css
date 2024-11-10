@@ -29,4 +29,5 @@ img {
   justify-content: space-between;
   gap: 20px;
   align-items: center;
+  list-style-type: none;
 }
