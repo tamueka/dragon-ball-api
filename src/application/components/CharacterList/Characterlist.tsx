@@ -13,7 +13,7 @@ const CharacterList: React.FC = () => {
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center", heigth: '100vh' }}
     >
       <div>
         <Search></Search>

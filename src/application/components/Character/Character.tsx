@@ -33,8 +33,23 @@ const Character: React.FC<CharacterProps> = ({
         alt={character.name}
         style={{ width: "100px" }}
       />
-      <button onClick={handleAddToFavorites}>Añadir a favoritos</button>
-      <button onClick={handleViewToFavorites}>Ver favoritos</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <button
+          style={{
+            margin: "1rem",
+          }}
+          onClick={handleAddToFavorites}
+        >
+          Añadir a favoritos
+        </button>
+        <button onClick={handleViewToFavorites}>Ver favoritos</button>
+      </div>
     </div>
   );
 };
