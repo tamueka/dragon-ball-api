@@ -6,6 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import { Character } from "../../types";
+import LocalStorageService from "../../services/localStorageService";
 
 interface DragonBallContextProps {
   characters: Character[];
@@ -27,43 +28,58 @@ interface DragonBallProviderProps {
 export const DragonBallProvider: React.FC<DragonBallProviderProps> = ({
   children,
 }) => {
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [favorites, setFavorites] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<Character[]>(() =>
+    LocalStorageService.load("characters", [])
+  );
+
+  const [favorites, setFavorites] = useState<Character[]>(() =>
+    LocalStorageService.load("favorites", [])
+  );
+
   const [searchTerm, setSearchTerm] = useState<string>("");
   const url = "https://dragonball-api.com/api/characters";
 
   useEffect(() => {
-    const fetchDataCharacter = async () => {
-      try {
-        const response = await fetch(url);
+    if (characters.length === 0) {
+      const fetchDataCharacter = async () => {
+        try {
+          const response = await fetch(url);
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const jsonData = await response.json();
+          setCharacters(jsonData.items);
+          LocalStorageService.save("characters", jsonData.items);
+        } catch (error) {
+          console.error("Failed to fetch data:", error);
         }
+      };
 
-        const jsonData = await response.json();
-        setCharacters(jsonData.items);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchDataCharacter();
-  }, []);
+      fetchDataCharacter();
+    }
+  }, [characters]);
 
   const addToFavorites = (character: Character) => {
     setFavorites((prevFavorites) => {
       if (!prevFavorites.some((fav) => fav.id === character.id)) {
-        return [...prevFavorites, character];
+        const updatedFavorites = [...prevFavorites, character];
+        LocalStorageService.save("favorites", updatedFavorites);
+        return updatedFavorites;
       }
       return prevFavorites;
     });
   };
 
   const removeFromFavorites = (characterId: number) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((character: any) => character.id !== characterId)
-    );
+    setFavorites((prevFavorites) => {
+      const updatedFavorites = prevFavorites.filter(
+        (character) => character.id !== characterId
+      );
+      LocalStorageService.save("favorites", updatedFavorites);
+      return updatedFavorites;
+    });
   };
 
   return (
