@@ -1,23 +1,23 @@
 import * as React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import CharacterDetail from "./application/components/CharacterDetail/CharacterDetail";
 import CharacterList from "./application/components/CharacterList/Characterlist";
+import Favorites from "./application/components/Favorites/Favorites";
 import { Footer } from "./application/components/Footer/Footer";
 import { Header } from "./application/components/Header/Header";
 import { DragonBallProvider } from "./application/context/DragonBallProvider";
-import CharacterDetail from "./application/components/CharacterDetail/CharacterDetail";
 
 export const App: React.FC = () => {
   return (
     <DragonBallProvider>
       <Router>
         <Header />
-        <div>
+        <div style={{ heigth: "100vh" }}>
           <h1 style={{ textAlign: "center" }}>Personajes de Dragon Ball</h1>
           <Routes>
-            {/* Ruta principal para la lista de personajes */}
             <Route path="/" element={<CharacterList />} />
-            {/* Ruta dinámica para los detalles de un personaje específico */}
-            <Route path="/character/:id" element={<CharacterDetail />} /> 
+            <Route path="/character/:id" element={<CharacterDetail />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </div>
         <Footer />

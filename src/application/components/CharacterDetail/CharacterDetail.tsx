@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDragonBallContext } from "../../context/DragonBallProvider";
 
 const CharacterDetail: React.FC = () => {
@@ -12,19 +12,23 @@ const CharacterDetail: React.FC = () => {
   );
 
   if (!character) {
-    return <p>Personaje no encontrado</p>; 
+    return <p>Personaje no encontrado</p>;
   }
 
   return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <h2>{character.name}</h2>
-      <img src={character.image} alt={character.name} style={{height: "80%", width: "80%"}}/>
+      <img
+        src={character.image}
+        alt={character.name}
+        style={{ height: "80%", width: "80%" }}
+      />
       <p>{character.description}</p>
       <p>{character.ki}</p>
       <p>{character.maxKi}</p>
-
-      <button onClick={() => navigate('/')}>Volver</button>
-
+      <button onClick={() => navigate("/")}>Volver</button>
     </div>
   );
 };

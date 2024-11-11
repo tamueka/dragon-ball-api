@@ -11,6 +11,7 @@ interface DragonBallContextProps {
   characters: Character[];
   favorites: Character[];
   addToFavorites: (character: Character) => void;
+  removeFromFavorites: (characterId: number) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 }
@@ -51,7 +52,18 @@ export const DragonBallProvider: React.FC<DragonBallProviderProps> = ({
   }, []);
 
   const addToFavorites = (character: Character) => {
-    setFavorites((prevFavorites) => [...prevFavorites, character]);
+    setFavorites((prevFavorites) => {
+      if (!prevFavorites.some((fav) => fav.id === character.id)) {
+        return [...prevFavorites, character];
+      }
+      return prevFavorites;
+    });
+  };
+
+  const removeFromFavorites = (characterId: number) => {
+    setFavorites((prevFavorites) =>
+      prevFavorites.filter((character: any) => character.id !== characterId)
+    );
   };
 
   return (
@@ -60,6 +72,7 @@ export const DragonBallProvider: React.FC<DragonBallProviderProps> = ({
         characters,
         favorites,
         addToFavorites,
+        removeFromFavorites,
         searchTerm,
         setSearchTerm,
       }}
