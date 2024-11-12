@@ -46,14 +46,14 @@ export const DragonBallProvider: React.FC<DragonBallProviderProps> = ({
           const response = await fetch(url);
 
           if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error! Estado: ${response.status}`);
           }
 
           const jsonData = await response.json();
           setCharacters(jsonData.items);
           LocalStorageService.save("characters", jsonData.items);
         } catch (error) {
-          console.error("Failed to fetch data:", error);
+          console.error("No se pudieron recuperar los datos:", error);
         }
       };
 
@@ -102,7 +102,7 @@ export const useDragonBallContext = () => {
   const context = useContext(DragonBallContext);
   if (!context) {
     throw new Error(
-      "useDragonBallContext must be used within a DragonBallProvider"
+      "useDragonBallContext debe usarse dentro de un DragonBallProvider"
     );
   }
   return context;

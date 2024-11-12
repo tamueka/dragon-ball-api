@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDragonBallContext } from "../../context/DragonBallProvider";
@@ -12,12 +13,10 @@ const CharacterList: React.FC = () => {
   );
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center", heigth: '100vh' }}
-    >
-      <div>
+    <CharacterListContainer>
+      <SearchContainer>
         <Search></Search>
-      </div>
+      </SearchContainer>
       {filteredCharacters.slice(0, 4).map((character) => (
         <Link to={`/character/${character.id}`} key={character.id}>
           <Character
@@ -27,8 +26,18 @@ const CharacterList: React.FC = () => {
           />
         </Link>
       ))}
-    </div>
+    </CharacterListContainer>
   );
 };
+
+const CharacterListContainer = styled.div`
+  display: flex;
+`;
+
+const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default CharacterList;
