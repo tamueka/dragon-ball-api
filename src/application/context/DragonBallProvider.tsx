@@ -37,7 +37,7 @@ export const DragonBallProvider: React.FC<DragonBallProviderProps> = ({
   );
 
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const url = "https://dragonball-api.com/api/characters";
+  const url = "https://dragonball-api.com/api/characters?limit=4";
 
   useEffect(() => {
     if (characters.length === 0) {

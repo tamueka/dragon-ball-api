@@ -17,7 +17,7 @@ const CharacterList: React.FC = () => {
       <SearchContainer>
         <Search></Search>
       </SearchContainer>
-      {filteredCharacters.slice(0, 4).map((character) => (
+      {filteredCharacters.map((character) => (
         <Link to={`/character/${character.id}`} key={character.id}>
           <Character
             key={character.id}
