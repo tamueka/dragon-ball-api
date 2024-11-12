@@ -14,7 +14,7 @@ export const App: React.FC = () => {
       <Router>
         <Header />
         <AppContainer>
-          <Title>Personajes de Dragon Ball</Title>
+          <Title>Dragon Ball</Title>
           <Routes>
             <Route path="/" element={<CharacterList />} />
             <Route path="/character/:id" element={<CharacterDetail />} />
